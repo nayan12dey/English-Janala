@@ -5,6 +5,8 @@ const loadLessons = () => {
         .then(json => displayLessons(json.data))  // get the json data
 }
 
+loadLessons();
+
 // {
 //     "id": 101,
 //     "level_no": 1,
@@ -12,6 +14,8 @@ const loadLessons = () => {
 // }
 
 
+
+/* Display all lessons buttons  */
 const displayLessons = (lessons) => {
 
     // 1. get the container and empty
@@ -27,7 +31,7 @@ const displayLessons = (lessons) => {
 
         // 2-2. add content to innerHTML
         btnDiv.innerHTML = `
-                        <button class="btn btn-outline btn-primary">
+                        <button onclick="loadLevelWord(${lesson.level_no})" class="btn btn-outline btn-primary">
                             <i class="fa-solid fa-circle-question"></i>Lesson - ${lesson.level_no}
                         </button>
         
@@ -38,5 +42,43 @@ const displayLessons = (lessons) => {
 
 }
 
-loadLessons();
 // displayLessons();
+
+
+/* get word by level  */
+const loadLevelWord = (id) => {
+    console.log(id);
+    const url = `https://openapi.programming-hero.com/api/level/${id}`;
+    fetch(url)
+        .then(response => response.json())
+        .then(json => displayLevelWord(json.data))
+
+}
+
+const displayLevelWord = (Words) => {
+    // console.log(Words)
+
+    // 1. get the container and empty
+    const wordContainer = document.getElementById("word-container");
+    // wordContainer.innerHTML = "";
+
+    // 2. get into every word 
+    Words.forEach(word => {
+        console.log(word);
+
+        // 2-1. create element
+        const card = document.createElement("div");
+
+        // 2-2. add innerHTML into container
+        card.innerHTML = `
+        <p>Cat</p>
+        
+        
+        `
+
+        // 2-3. append into container 
+        wordContainer.append(card);
+    });
+
+
+}
