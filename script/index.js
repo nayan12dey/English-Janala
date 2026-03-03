@@ -31,7 +31,7 @@ const displayLessons = (lessons) => {
 
         // 2-2. add content to innerHTML
         btnDiv.innerHTML = `
-                        <button onclick="loadLevelWord(${lesson.level_no})" class="btn btn-outline btn-primary">
+                        <button id="lesson-btn-${lesson.level_no}" onclick="loadLevelWord(${lesson.level_no})" class="btn btn-outline btn-primary lesson-btn">
                             <i class="fa-solid fa-circle-question"></i>Lesson - ${lesson.level_no}
                         </button>
         
@@ -45,14 +45,31 @@ const displayLessons = (lessons) => {
 // displayLessons();
 
 
+
 /* get word by level  */
 const loadLevelWord = (id) => {
     console.log(id);
     const url = `https://openapi.programming-hero.com/api/level/${id}`;
     fetch(url)
         .then(response => response.json())
-        .then(json => displayLevelWord(json.data))
+        .then(json => {
+            removeActive();  // --> remove all active class
+            const clickBtn = document.getElementById(`lesson-btn-${id}`);
+            // console.log(clickBtn);
+            clickBtn.classList.add("active");  // --> add active in clicked button
+            displayLevelWord(json.data)
+        })
 
+}
+
+
+/* remove active style from button */
+const removeActive = () => {
+    const lessonButtons = document.querySelectorAll(".lesson-btn");
+    // console.log(lessonButtons);
+    lessonButtons.forEach(button => {
+        button.classList.remove("active");
+    })
 }
 
 
@@ -88,7 +105,7 @@ const displayLevelWord = (words) => {
 
     // 2. get into every word 
     words.forEach(word => {
-        console.log(word);
+        // console.log(word);
 
         // 2-1. create element
         const card = document.createElement("div");
@@ -100,7 +117,7 @@ const displayLevelWord = (words) => {
             <p class="font-semibold">Meaning / Pronounciation</p>
             <div class="font-bangla text-2xl font-medium">${word.meaning? word.meaning : "অর্থ পাওয়া যায়নি" } / ${word.pronunciation ? word.pronunciation : "pronunciation পাওয়া যায়নি"}</div>
             <div class="flex justify-between items-center">
-                <button class="btn bg-[#1A91FF30] hover:bg-[#1A91FF90]"><i class="fa-solid fa-circle-info"></i></button>
+                <button onclick="my_modal_5.showModal()" class="btn bg-[#1A91FF30] hover:bg-[#1A91FF90]"><i class="fa-solid fa-circle-info"></i></button>
                 <button class="btn bg-[#1A91FF30] hover:bg-[#1A91FF90]"><i class="fa-solid fa-volume-high"></i></button>
             </div>
         </div>
