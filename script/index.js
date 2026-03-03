@@ -1,4 +1,7 @@
 
+// Feature 1: loadLessons and displayLessons ******
+
+
 const loadLessons = () => {
     fetch("https://openapi.programming-hero.com/api/levels/all") // promise of response
         .then(response => response.json()) // promise of json data
@@ -45,6 +48,8 @@ const displayLessons = (lessons) => {
 // displayLessons();
 
 
+
+// Feature 2: loadLevelWord  and displayLevelWord ******
 
 /* get word by level  */
 const loadLevelWord = (id) => {
@@ -135,6 +140,8 @@ const displayLevelWord = (words) => {
 }
 
 
+// Feature 3: loadWordDetail and displayWordDetail in the Modal ******
+
 /* load word detail in Modal */
 const loadWordDetail = async(id) => {
     const url = `https://openapi.programming-hero.com/api/word/${id}`;
@@ -196,11 +203,14 @@ const displayWordDetails = (word) => {
     
     
     `;
-    document.getElementById("word_modal").showModal()
+    document.getElementById("word_modal").showModal()  // ---> show the modal
 
 
 }
 
+
+
+// Feature 4: Manage Spinner  ******
 
 /* spinner manage */
 const manageSpinner = (status) => {
@@ -215,6 +225,27 @@ const manageSpinner = (status) => {
 }
 
 
+// Feature 5: Implement Search  ******
+document.getElementById("btn-search").addEventListener("click", () => {
+    removeActive();
+    const input = document.getElementById("input-search");
+    const searchValue = input.value.trim().toLowerCase();
+    console.log(searchValue);
+
+    fetch("https://openapi.programming-hero.com/api/words/all")
+    .then(response => response.json())
+    .then(data => {
+        const allWords = data.data;
+        console.log(allWords)
+        const filterWords = allWords.filter(word => word.word.toLowerCase().includes(searchValue));
+        // console.log(filterWords);
+        displayLevelWord(filterWords);
+    });
+})
+
+
+
+
 /* create synonyms in modal */
 // const createElements = (arr) => {
 //     // console.log(arr);
@@ -222,5 +253,6 @@ const manageSpinner = (status) => {
 //     const htmlElements = arr.map(elem => `<span class="btn">${elem}</span>`)
 //     return htmlElements.join(" ");
 // }
+
 
 
