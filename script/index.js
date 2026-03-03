@@ -178,7 +178,7 @@ const displayWordDetails = (word) => {
     const detailsBox = document.getElementById("details-container")
 
     // Generate synonyms HTML
-    const synonymsHTML = word.synonyms && word.synonyms.length ? word.synonyms.map(elem => `<span class="btn mr-2 mb-2">${elem}</span>`).join("") : `<span class="text-gray-500">No synonyms found</span>`;
+    const synonymsHTML = word.synonyms && word.synonyms.length ? word.synonyms.map(elem => `<span class="btn bg-sky-100 mr-2 mb-2">${elem}</span>`).join("") : `<span class="text-gray-500">No synonyms found</span>`;
 
 
     detailsBox.innerHTML = `
