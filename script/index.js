@@ -66,15 +66,28 @@ const loadLevelWord = (id) => {
 
 
 /* display word card by level */
-const displayLevelWord = (Words) => {
+const displayLevelWord = (words) => {
     // console.log(Words)
 
     // 1. get the container and empty
     const wordContainer = document.getElementById("word-container");
     wordContainer.innerHTML = "";
 
+    // handle error for length is zero
+    if(words.length == 0){
+        wordContainer.innerHTML = `
+        <div class="text-center col-span-full rounded-xl py-10 space-y-2">
+        <img src="./assets/alert-error.png" class="mx-auto" />
+            <p class="font-bangla text-gray-500 font-medium">এই Lesson এ এখনো কোন Vocabulary যুক্ত করা হয়নি।</p>
+            <h2 class="font-bangla text-4xl font-bold">নেক্সট Lesson এ যান</h2>
+        </div>
+        
+        `;
+        return;
+    }
+
     // 2. get into every word 
-    Words.forEach(word => {
+    words.forEach(word => {
         console.log(word);
 
         // 2-1. create element
@@ -83,9 +96,9 @@ const displayLevelWord = (Words) => {
         // 2-2. add innerHTML into container
         card.innerHTML = `
         <div class="bg-white rounded-xl shadow-sm text-center py-10 px-5 space-y-4 transition-all duration-300 hover:shadow-lg hover:shadow-sky-300">
-            <h2 class="font-bold text-2xl">${word.word}</h2>
+            <h2 class="font-bold text-2xl">${word.word ? word.word : "শব্দ পাওয়া যায়নি"}</h2>
             <p class="font-semibold">Meaning / Pronounciation</p>
-            <div class="font-bangla text-2xl font-medium">${word.meaning} / ${word.pronunciation}</div>
+            <div class="font-bangla text-2xl font-medium">${word.meaning? word.meaning : "অর্থ পাওয়া যায়নি" } / ${word.pronunciation ? word.pronunciation : "pronunciation পাওয়া যায়নি"}</div>
             <div class="flex justify-between items-center">
                 <button class="btn bg-[#1A91FF30] hover:bg-[#1A91FF90]"><i class="fa-solid fa-circle-info"></i></button>
                 <button class="btn bg-[#1A91FF30] hover:bg-[#1A91FF90]"><i class="fa-solid fa-volume-high"></i></button>
@@ -100,3 +113,5 @@ const displayLevelWord = (Words) => {
 
 
 }
+
+
