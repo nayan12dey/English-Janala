@@ -24,7 +24,7 @@ const displayLessons = (lessons) => {
 
     // 2. get into every lessons
     for (const lesson of lessons) {
-        console.log(lesson);
+        // console.log(lesson);
 
         // 2-1. create Element
         const btnDiv = document.createElement("div");
@@ -117,7 +117,7 @@ const displayLevelWord = (words) => {
             <p class="font-semibold">Meaning / Pronounciation</p>
             <div class="font-bangla text-2xl font-medium">${word.meaning? word.meaning : "অর্থ পাওয়া যায়নি" } / ${word.pronunciation ? word.pronunciation : "pronunciation পাওয়া যায়নি"}</div>
             <div class="flex justify-between items-center">
-                <button onclick="my_modal_5.showModal()" class="btn bg-[#1A91FF30] hover:bg-[#1A91FF90]"><i class="fa-solid fa-circle-info"></i></button>
+                <button onclick="loadWordDetail(${word.id})" class="btn bg-[#1A91FF30] hover:bg-[#1A91FF90]"><i class="fa-solid fa-circle-info"></i></button>
                 <button class="btn bg-[#1A91FF30] hover:bg-[#1A91FF90]"><i class="fa-solid fa-volume-high"></i></button>
             </div>
         </div>
@@ -132,3 +132,66 @@ const displayLevelWord = (words) => {
 }
 
 
+/* load word detail */
+const loadWordDetail = async(id) => {
+    const url = `https://openapi.programming-hero.com/api/word/${id}`;
+    console.log(url);
+    const response = await fetch(url);
+    const details =  await response.json();
+    displayWordDetails(details.data);
+
+}
+
+
+// {
+//     "word": "Cautious",
+//     "meaning": "সতর্ক",
+//     "pronunciation": "কশাস",
+//     "level": 2,
+//     "sentence": "Be cautious while crossing the road.",
+//     "points": 2,
+//     "partsOfSpeech": "adjective",
+//     "synonyms": [
+//         "careful",
+//         "alert",
+//         "watchful"
+//     ],
+//     "id": 3
+// }
+
+
+
+/* display word detail  */
+const displayWordDetails = (word) => {
+    console.log(word);
+
+    const detailsBox = document.getElementById("details-container")
+    detailsBox.innerHTML = `
+    <div id="details-container" class="space-y-4">
+                <div class="">
+                    <h2 class="text-2xl font-bold">${word.word} (<i class="fa-solid fa-microphone-lines"></i>:${word.pronunciation})</h2>
+                </div>
+                <div class="">
+                    <h2 class="font-bold mb-2">Meaning</h2>
+                    <p class="font-bangla font-semibold">${word.meaning}</p>
+                </div>
+                <div class="">
+                    <h2 class="font-bold mb-2">Example</h2>
+                    <p class="font-bangla text-lg">${word.sentence}</p>
+                </div>
+                <div class="">
+                    <h2 class="font-bold mb-2">Synonym</h2>
+                    <span class="btn bg-sky-100">Enthusiastic</span>
+                    <span class="btn bg-sky-100">excited</span>
+                    <span class="btn bg-sky-100">keen</span>
+                </div>
+            </div>
+    
+    
+    `;
+    document.getElementById("word_modal").showModal()
+
+    
+
+
+}
