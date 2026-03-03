@@ -48,6 +48,7 @@ const displayLessons = (lessons) => {
 
 /* get word by level  */
 const loadLevelWord = (id) => {
+    manageSpinner(true);
     console.log(id);
     const url = `https://openapi.programming-hero.com/api/level/${id}`;
     fetch(url)
@@ -100,6 +101,7 @@ const displayLevelWord = (words) => {
         </div>
         
         `;
+        manageSpinner(false);
         return;
     }
 
@@ -128,11 +130,12 @@ const displayLevelWord = (words) => {
         wordContainer.append(card);
     });
 
+    manageSpinner(false);
 
 }
 
 
-/* load word detail */
+/* load word detail in Modal */
 const loadWordDetail = async(id) => {
     const url = `https://openapi.programming-hero.com/api/word/${id}`;
     console.log(url);
@@ -161,11 +164,16 @@ const loadWordDetail = async(id) => {
 
 
 
-/* display word detail  */
+/* display word detail in Modal  */
 const displayWordDetails = (word) => {
     console.log(word);
 
     const detailsBox = document.getElementById("details-container")
+
+    // Generate synonyms HTML
+    const synonymsHTML = word.synonyms && word.synonyms.length ? word.synonyms.map(elem => `<span class="btn mr-2 mb-2">${elem}</span>`).join("") : `<span class="text-gray-500">No synonyms found</span>`;
+
+    
     detailsBox.innerHTML = `
     <div id="details-container" class="space-y-4">
                 <div class="">
@@ -173,7 +181,7 @@ const displayWordDetails = (word) => {
                 </div>
                 <div class="">
                     <h2 class="font-bold mb-2">Meaning</h2>
-                    <p class="font-bangla font-semibold">${word.meaning}</p>
+                    <p class="font-bangla font-semibold">${word.meaning? word.meaning : `<span class="text-gray-500 font-normal">No Meaning found</span>`}</p>
                 </div>
                 <div class="">
                     <h2 class="font-bold mb-2">Example</h2>
@@ -181,9 +189,8 @@ const displayWordDetails = (word) => {
                 </div>
                 <div class="">
                     <h2 class="font-bold mb-2">Synonym</h2>
-                    <span class="btn bg-sky-100">Enthusiastic</span>
-                    <span class="btn bg-sky-100">excited</span>
-                    <span class="btn bg-sky-100">keen</span>
+                    <div class>${synonymsHTML}
+                    </div>
                 </div>
             </div>
     
@@ -191,7 +198,29 @@ const displayWordDetails = (word) => {
     `;
     document.getElementById("word_modal").showModal()
 
-    
-
 
 }
+
+
+/* spinner manage */
+const manageSpinner = (status) => {
+    if(status == true){
+        document.getElementById("spinner").classList.remove("hidden")
+        document.getElementById("word-container").classList.add("hidden");
+    }
+    else{
+        document.getElementById("word-container").classList.remove("hidden");
+        document.getElementById("spinner").classList.add("hidden")
+    }
+}
+
+
+/* create synonyms in modal */
+// const createElements = (arr) => {
+//     // console.log(arr);
+
+//     const htmlElements = arr.map(elem => `<span class="btn">${elem}</span>`)
+//     return htmlElements.join(" ");
+// }
+
+
