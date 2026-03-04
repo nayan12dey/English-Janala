@@ -89,15 +89,35 @@
             <p class="font-bangla">আজ থেকেই আপনার ভাষা শেখার যাত্রা শুরু করুন। আপনি যদি নতুন হন অথবা <br> আপনার দক্ষতা
                 বাড়াতে চান, আমাদের Interactive Lessons আপনাকে নিয়ে <br> যাবে অন্য একটি Level এ</p>
 
-            <fieldset class="space-y-3 mt-9">
+            <form class="space-y-3 mt-9">
                 <div>
-                    <input type="text" name="" id="" class="p-2 rounded-md" placeholder="Enter Your Name">
+                    <label class="input validator"><input type="email" placeholder="Enter Your Email Address"required /></label>
+                    
+                    <p class="validator-hint hidden">Enter Your Email Address</p>
                 </div>
                 <div>
-                    <input type="password" name="" id="" class="p-2 rounded-md" placeholder="Enter Your Password">
+                    <label class="input validator">
+                        <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none"
+                                stroke="currentColor">
+                                <path
+                                    d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z">
+                                </path>
+                                <circle cx="16.5" cy="7.5" r=".5" fill="currentColor"></circle>
+                            </g>
+                        </svg>
+                        <input type="password" required placeholder="Password" minlength="8"
+                            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                            title="Must be more than 8 characters, including number, lowercase letter, uppercase letter" />
+                    </label>
+                    <p class="validator-hint hidden">
+                        Must be more than 8 characters, including
+                        <br />At least one number <br />At least one lowercase letter <br />At least one uppercase
+                        letter
+                    </p>
                 </div>
-            </fieldset>
-            <button class="btn btn-primary p-6 mt-4">Get Started</button>
+                <button class="btn btn-primary p-6 mt-4">Get Started</button>
+            </form>
         </div>
         <div class="image flex-1">
             <img src="./assets/hero-student.png" alt="">
@@ -125,10 +145,10 @@
         <div class="join">
             <div>
                 <label class="input validator join-item">
-                    <input id="input-search" type="text" placeholder="Search vocabulary Now" required />
+                    <input id="input-search" type="text" placeholder="Search vocabulary now..." required />
                 </label>
             </div>
-            <button id="btn-search" class="btn btn-primary join-item">Join</button>
+            <button id="btn-search" class="btn btn-primary join-item">Search</button>
         </div>
     </section>
 

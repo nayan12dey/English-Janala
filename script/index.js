@@ -35,7 +35,7 @@ const displayLessons = (lessons) => {
         // 2-2. add content to innerHTML
         btnDiv.innerHTML = `
                         <button id="lesson-btn-${lesson.level_no}" onclick="loadLevelWord(${lesson.level_no})" class="btn btn-outline btn-primary lesson-btn">
-                            <i class="fa-solid fa-circle-question"></i>Lesson - ${lesson.level_no}
+                            <i class="fa-solid fa-book-open"></i>Lesson - ${lesson.level_no}
                         </button>
         
         `
