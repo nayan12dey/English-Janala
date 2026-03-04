@@ -195,7 +195,7 @@ const displayWordDetails = (word) => {
     <!-- Meaning Section -->
     <div>
         <h2 class="font-bold text-xl text-gray-700 mb-2 border-b border-gray-200 pb-1">Meaning</h2>
-        <p class="font-bangla font-medium text-gray-800">
+        <p class="font-bangla font-medium text-gray-800 text-xl">
             ${word.meaning ? word.meaning : `<span class="text-gray-400 font-normal">No Meaning found</span>`}
         </p>
     </div>
@@ -210,6 +210,7 @@ const displayWordDetails = (word) => {
 
     <!-- Synonym Section -->
     <div>
+        <h2 class="font-bold text-xl text-gray-700 mb-2 border-b border-gray-200 pb-1">Synonym</h2>
         ${synonymsHTML}
         </div>
     </div>
