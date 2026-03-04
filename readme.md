@@ -1,4 +1,4 @@
-# English Janala
+# <img width="25px" src="./assets/logo.png" /> English Janala
 
 **English Janala** is an interactive platform designed to help users improve their English vocabulary across different levels. The platform dynamically loads words, meanings, pronunciations, synonyms, and example sentences through an API, providing an engaging and user-friendly learning experience.  
 
