@@ -119,7 +119,7 @@ const displayLevelWord = (words) => {
 
         // 2-2. add innerHTML into container
         card.innerHTML = `
-        <div class="bg-white rounded-xl shadow-sm text-center py-10 px-5 space-y-4 transition-all duration-300 hover:shadow-lg hover:shadow-sky-300">
+        <div class="bg-white rounded-xl shadow-sm text-center py-10 px-5 space-y-4 h-full transition-all duration-300 hover:shadow-lg hover:shadow-sky-300">
             <h2 class="font-bold text-2xl">${word.word ? word.word : "শব্দ পাওয়া যায়নি"}</h2>
             <p class="font-semibold">Meaning / Pronounciation</p>
             <div class="font-bangla text-2xl font-medium">${word.meaning ? word.meaning : "অর্থ পাওয়া যায়নি"} / ${word.pronunciation ? word.pronunciation : "pronunciation পাওয়া যায়নি"}</div>
@@ -178,28 +178,42 @@ const displayWordDetails = (word) => {
     const detailsBox = document.getElementById("details-container")
 
     // Generate synonyms HTML
-    const synonymsHTML = word.synonyms && word.synonyms.length ? word.synonyms.map(elem => `<span class="btn bg-sky-100 mr-2 mb-2">${elem}</span>`).join("") : `<span class="text-gray-500">No synonyms found</span>`;
+    const synonymsHTML = word.synonyms && word.synonyms.length ? word.synonyms.map(elem => `<span class="btn btn-primary mr-2 mb-2">${elem}</span>`).join("") : `<span class="text-gray-500">No synonyms found</span>`;
 
 
     detailsBox.innerHTML = `
-    <div id="details-container" class="space-y-4">
-                <div class="">
-                    <h2 class="text-2xl font-bold">${word.word} (<i class="fa-solid fa-microphone-lines"></i>:${word.pronunciation})</h2>
-                </div>
-                <div class="">
-                    <h2 class="font-bold mb-2">Meaning</h2>
-                    <p class="font-bangla font-semibold">${word.meaning ? word.meaning : `<span class="text-gray-500 font-normal">No Meaning found</span>`}</p>
-                </div>
-                <div class="">
-                    <h2 class="font-bold mb-2">Example</h2>
-                    <p class="font-bangla text-lg">${word.sentence}</p>
-                </div>
-                <div class="">
-                    <h2 class="font-bold mb-2">Synonym</h2>
-                    <div class>${synonymsHTML}
-                    </div>
-                </div>
-            </div>
+    <div id="details-container" class="max-w-xl mx-auto p-6 bg-white shadow-lg rounded-xl space-y-6 border border-gray-200">
+    <!-- Word Header -->
+    <div class="text-center">
+        <h2 class="text-3xl font-extrabold text-gray-800">
+            ${word.word} 
+            <i class="fa-solid fa-microphone-lines text-blue-500 ml-2"></i>: 
+            <span class="text-gray-600 font-medium">${word.pronunciation}</span>
+        </h2>
+    </div>
+
+    <!-- Meaning Section -->
+    <div>
+        <h2 class="font-bold text-xl text-gray-700 mb-2 border-b border-gray-200 pb-1">Meaning</h2>
+        <p class="font-bangla font-medium text-gray-800">
+            ${word.meaning ? word.meaning : `<span class="text-gray-400 font-normal">No Meaning found</span>`}
+        </p>
+    </div>
+
+    <!-- Example Section -->
+    <div>
+        <h2 class="font-bold text-xl text-gray-700 mb-2 border-b border-gray-200 pb-1">Example</h2>
+        <p class="font-bangla text-lg italic text-gray-700">
+            "${word.sentence ? word.sentence : "No example available."}"
+        </p>
+    </div>
+
+    <!-- Synonym Section -->
+    <div>
+        ${synonymsHTML}
+        </div>
+    </div>
+</div>
     
     
     `;
