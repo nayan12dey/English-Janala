@@ -11,3 +11,7 @@
     background-color: #422AD5;
     color: #FFFFFF;
 }
+
+html{
+    scroll-behavior: smooth;
+}
